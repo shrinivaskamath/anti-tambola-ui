@@ -1,0 +1,83 @@
+.navigationHeader {
+    background-color: #222437;
+    color: cornsilk;
+}
+.container-fluid {
+    background-color: #1C1E2F;
+}
+
+.myChit{
+    background-color: #222437;
+    color: white;
+}
+
+.grid {
+    background-color: #222437;
+    color: white;
+
+}
+.gridTd {
+    border: 2px solid black;
+    background-color: gray;
+    text-align: center;
+    padding: 1%;
+}
+.gridTr {
+    border: 1px solid gray;
+}
+.chitHeader {
+    margin: 0%;
+    padding: 0%;
+    background-color:#1D2039;
+    color: white;
+    border: none;
+}
+.tdChit {
+    border-bottom: 1px solid gray;
+    text-align: center
+}
+.btn-success {
+    border-radius: 80%;
+    border: none;
+}
+
+.CreateTab {
+    margin-top: 5%;
+}
+.joinTab {
+    margin-top: 5%;
+}
+.loginHeader{
+    border-style: solid;
+    padding: 5%;
+}
+.playerListTd {
+    text-align: center;
+}
+.shareDiv {
+    margin-top: 2%;
+}
+.alert-danger {
+    margin-top: 2%;
+}
+.playerTurn{
+    background-color: skyblue;
+    cursor: pointer;
+
+}
+.numberSelected{
+    background-color: tomato;
+}
+.victoryMessageDiv {
+    background-color: chartreuse;
+}
+.nickName{
+    
+}
+.turnMessage{
+    float: right;
+}
+
+.leftHeader {
+    float: left;
+}

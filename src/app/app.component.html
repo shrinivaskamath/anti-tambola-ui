@@ -1,0 +1,191 @@
+<div class="container-fluid">
+  <div class="row alert alert-primary navigationHeader">
+    <div class="col-md-12 Scol-xs-12">
+      <h4 style="text-align: center;">Anti Tambola</h4>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!gameStarted" >
+  <div class="row">
+    <div class="col-lg-12 col-xs-10">
+      <div class="alert alert-default" role="alert">
+        <div class="loginHeader">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Nick name</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="nickName" placeholder="Enter your name here..."
+              aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist" *ngIf="nickName.length>=3">
+              <a class="nav-item nav-link" [ngClass]="{'active':defalutTab=='create'}" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">Create room</a>
+              <a class="nav-item nav-link" [ngClass]="{'active':defalutTab=='join'}" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">Join room</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent" *ngIf="nickName.length>=3">
+            <div class="tab-pane fade CreateTab" [ngClass]="{'show active':defalutTab=='create'}" id="nav-home" role="tabpanel"
+              aria-labelledby="nav-home-tab">
+              <div>
+                <button class="btn btn-primary" (click)="onCreateClick()" [disabled]="buttonText=='Start' && players.length==0">{{buttonText}}</button>
+              </div>
+              <div class="alert alert-success shareDiv" *ngIf="shareUrl!=undefined">
+                <p>Share this link to your friends to invite... <a href={{shareUrl}}>{{shareUrl}}</a>
+                  Or ask your friend to join the room using id {{roomId}}</p>
+              </div>
+              <div class="alert alert-danger" *ngIf="joinError">
+                <p>Error while creating room! Try again.</p>
+              </div>
+            </div>
+            <div class="tab-pane fade joinTab"[ngClass]="{'show active':defalutTab=='join'}" id="nav-profile" role="tabpanel" *ngIf="nickName.length>=3"
+              aria-labelledby="nav-profile-tab">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Code</span>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="roomId" placeholder="" aria-label="Username"
+                  aria-describedby="basic-addon1">
+              </div>
+              <button class="btn btn-primary" (click)="onJoinClick()" [disabled]="isJoinVisible">Join</button>
+              <div class="alert alert-success shareDiv" *ngIf="shareUrl!=undefined">
+                <p>Share this link to your friends to invite... <a href={{shareUrl}}>{{shareUrl}}</a>
+                  Or ask your friend to join the room using id {{roomId}}</p>
+              </div>
+              <div class="alert alert-danger" *ngIf="joinError">
+                <p>Error while joining room! Try again.</p>
+              </div>
+            </div>
+
+            <div class="spinner" *ngIf="isSpin">
+              <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-info" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-12 col-xs-10">
+      <table class="table">
+        <tr *ngFor="let player of players">
+          <td class="playerListTd">
+            <h4>{{player}} joined</h4>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row" *ngIf="gameStarted">
+    <div class="col-xl-6">
+      <div class="row">
+        <div class="col-12 col-xl-12">
+          <div>
+            <div class="alert alert-primary chitHeader" role="alert" *ngIf="playerRank==0">
+              <div class="leftHeader">
+                <button type="button" class="btn btn-success">{{chit.count}}/15</button>
+                {{nickName}}
+              </div>
+              <p class="turnMessage">{{turnMessage}}</p>
+            </div>
+            <table class="table myChit" *ngIf="playerRank==0">
+              <tr>
+                <td *ngFor="let row of chit.firstRow" class="tdChit">
+                  {{row.value}}
+                </td>
+              </tr>
+              <tr>
+
+                <td *ngFor="let row of chit.secondRow" class="tdChit">
+                  {{row.value}}
+                </td>
+              </tr>
+              <tr>
+                <td *ngFor="let row of chit.thirdRow" class="tdChit">
+                  {{row.value}}
+                </td>
+              </tr>
+            </table>
+            <table  class="table victoryMessageDiv" *ngIf="playerRank>0">
+              <tr>
+                <td>{{victoryMessage}}</td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-xl-12">
+          <table class="table grid">
+            <tr *ngFor="let row of rows" class="gridTr">
+              <td *ngFor="let column of columns" class="gridTd" [ngClass]="{'playerTurn':isPlayerTurn, 'numberSelected':pickedNumbers.indexOf(tiles[row][column].value) != -1}" (click)="onGridClick(tiles[row][column].value)">
+                {{tiles[row][column].value}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="col 12">
+      <div class="row">
+        <div class="col 12 col-xl-6" *ngFor="let player of getValues()">
+            <div class="alert alert-primary chitHeader" role="alert" *ngIf="player.playerRank==0">
+              <button type="button" class="btn btn-success">{{player.chit.count}}/15</button>
+              {{player.name}}
+            </div>
+            <table class="table myChit" *ngIf="player.playerRank==0">
+              <tr>
+                <td *ngFor="let row of player.chit.firstRow" class="tdChit">
+                  {{row.value}}
+                </td>
+              </tr>
+              <tr>
+                <td *ngFor="let row of player.chit.secondRow" class="tdChit">
+                  {{row.value}}
+                </td>
+              </tr>
+              <tr>
+                <td *ngFor="let row of player.chit.thirdRow" class="tdChit">
+                  {{row.value}}
+              </tr>
+            </table>
+            <table  class="table victoryMessageDiv" *ngIf="player.playerRank>0">
+              <tr>
+                <td>{{player.victoryMessage}}</td>
+              </tr>
+            </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<router-outlet></router-outlet>

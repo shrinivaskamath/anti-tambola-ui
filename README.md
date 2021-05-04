@@ -1,33 +1,27 @@
-# `create-colyseus-app`
+# Anti Tambola
 
-An npm init template for kick starting a Colyseus project in TypeScript.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
-## :crossed_swords: Usage
+## Development server
 
-```
-npm init colyseus-app
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Structure
+## Code scaffolding
 
-- `index.ts`: main entry point, register an empty room handler and attach [`@colyseus/monitor`](https://github.com/colyseus/colyseus-monitor)
-- `MyRoom.ts`: an empty room handler for you to implement your logic
-- `loadtest/example.ts`: scriptable client for the loadtest tool (see `npm run loadtest`)
-- `package.json`:
-    - `scripts`:
-        - `npm start`: runs `ts-node index.ts`
-        - `npm run loadtest`: runs the [`@colyseus/loadtest`](https://github.com/colyseus/colyseus-loadtest/) tool for testing the connection, using the `loadtest/example.ts` script.
-    - `dependencies`:
-        - `colyseus`
-        - `@colyseus/monitor`
-        - `express`
-    - `devDependencies`
-        - `ts-node`
-        - `typescript`
-        - `@colyseus/loadtest`
-- `tsconfig.json`: TypeScript configuration file
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+## Build
 
-## License
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-MIT
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
