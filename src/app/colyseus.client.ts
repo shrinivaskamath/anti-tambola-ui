@@ -8,7 +8,7 @@ export class ColyseusClient {
 
      create(name): Promise<any> {
         let options = {name: name};
-        
+
         return this.client.create<GameState>('my_room', options);
     }
 
@@ -16,8 +16,8 @@ export class ColyseusClient {
         let options = {name: name};
         return this.client.joinById<GameState>(roomId, options);
     }
-    
-    
+
+
     start(room) {
         room.send({startGame:true});
     }
@@ -27,7 +27,7 @@ export class ColyseusClient {
     }
 
     getEndpoint() {
-        return 'wss://alobmat-server.herokuapp.com/'
+        return 'wss://anti-tambola-server.herokuapp.com/'
     }
 
 }
